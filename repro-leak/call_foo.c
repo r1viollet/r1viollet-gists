@@ -105,11 +105,11 @@ void proc_read(ProcStatus *procstat)
 }
 
 // symbol coming from Go
-extern void foo(void);
+extern void go_foo(void);
 
 static void *call_foo(void *p)
 {
-	foo();
+	go_foo();
 	return NULL;
 }
 
@@ -121,6 +121,6 @@ void bar(void)
 	proc_read(&procstatus);
 	printf("Hello from C : %s", __FUNCTION__);
 	printf("procstat->rss %lu\n", procstatus.rss);
-	sleep(1);
+	usleep(10);
 	pthread_join(t, NULL);
 }
